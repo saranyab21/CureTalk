@@ -69,7 +69,7 @@ def error(update, context):
 
 
 def main():
-    updater = Updater(API_KEY, use_context=True)
+    updater = Updater(TOKEN, use_context=True)
     dp = updater.dispatcher
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("exit", exit))
