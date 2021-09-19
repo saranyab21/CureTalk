@@ -1,7 +1,7 @@
 from telegram.ext import *
 import numpy as np
 import pandas as pd
-import pickle
+import pickle5 as pickle
 from nltk.stem import PorterStemmer
 from googlesearch import search
 
