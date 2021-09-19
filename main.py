@@ -3,31 +3,44 @@ import response as r
 import os
 
 import os
-ON_HEROKU = os.environ.get('ON_HEROKU')
 
-if ON_HEROKU:
-    # get the heroku port
-    port = int(os.environ.get('PORT', 17995))  # as per OP comments default is 17995
-else:
-    port = 3000
+TOKEN = os.getenv("TOKEN")
+
+#ON_HEROKU = os.environ.get('ON_HEROKU')
+
+# if ON_HEROKU:
+# get the heroku port
+# port = int(os.environ.get('PORT', 17995))  # as per OP comments default is 17995
+# else:
+#port = 3000
 
 
-API_KEY="1977152020:AAGfZUZ9fHqadNDji8WjiPr466dNJo1vfLk"
+# API_KEY="1977152020:AAGfZUZ9fHqadNDji8WjiPr466dNJo1vfLk"
 
-def help(update,context):
+def help(update, context):
     update.message.reply_text("Hello! This is Team Cure Talk.")
-    update.message.reply_text("\nWe are 5 students from UEMK who have come up with a plan to put Computer Science to mankind's best use!")
-    update.message.reply_text("Our team involves:- \n1. Mehuly Chakraborthy \n2. Suvra Shaw \n3. Diptaraj Sen \n4. Saranya Bhattacharjee\n5. Kaustav Roy")
-    update.message.reply_text(" We aim to bring to you the basic medical need that might help cure you.")
-    update.message.reply_text("From hospitals to treatments, our bot can work miracles in dire needs")
-    update.message.reply_text("\n We hope to own a small part in your recovery journey! Thank you!")
+    update.message.reply_text(
+        "\nWe are 5 students from UEMK who have come up with a plan to put Computer Science to mankind's best use!")
+    update.message.reply_text(
+        "Our team involves:- \n1. Mehuly Chakraborthy \n2. Suvra Shaw \n3. Diptaraj Sen \n4. Saranya Bhattacharjee\n5. Kaustav Roy")
+    update.message.reply_text(
+        " We aim to bring to you the basic medical need that might help cure you.")
+    update.message.reply_text(
+        "From hospitals to treatments, our bot can work miracles in dire needs")
+    update.message.reply_text(
+        "\n We hope to own a small part in your recovery journey! Thank you!")
 
-def exit(update,context):
-    update.message.reply_text("Thank you for being with us! Team CureTalk wishes you the best of health.")
 
-def symptoms(update,context):
+def exit(update, context):
+    update.message.reply_text(
+        "Thank you for being with us! Team CureTalk wishes you the best of health.")
+
+
+def symptoms(update, context):
     update.message.reply_text("Please type in your symptoms.")
-    update.message.reply_text("PLEASE START THE SENTENCE WITH THE WORD: Symptom is/Symptoms are")
+    update.message.reply_text(
+        "PLEASE START THE SENTENCE WITH THE WORD: Symptom is/Symptoms are")
+
 
 '''
 def symptom_handle(update,context):
@@ -36,36 +49,46 @@ def symptom_handle(update,context):
     update.message.reply_text(resp)
 '''
 
-def hospitals(update,context):
-    update.message.reply_text("Please enter the city that you live in, in the following manner.")
-    update.message.reply_text("Hospitals in {your city name}.\nFor eg: Hospitals in Chennai")
+
+def hospitals(update, context):
+    update.message.reply_text(
+        "Please enter the city that you live in, in the following manner.")
+    update.message.reply_text(
+        "Hospitals in {your city name}.\nFor eg: Hospitals in Chennai")
 
 
-def handle_message(update,context):
-    #count=0
+def handle_message(update, context):
+    # count=0
     text = str(update.message.text).lower()
-    response=r.sample(text)
+    response = r.sample(text)
     update.message.reply_text(response)
 
-def error(update,context):
+
+def error(update, context):
     print("Error")
 
+
 def main():
-    updater= Updater(API_KEY, use_context=True)
-    dp= updater.dispatcher
-    dp.add_handler(CommandHandler("help",help))
+    updater = Updater(API_KEY, use_context=True)
+    dp = updater.dispatcher
+    dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("exit", exit))
     dp.add_handler(CommandHandler("symptoms", symptoms))
     dp.add_handler(CommandHandler("hospitals", hospitals))
     dp.add_error_handler(error)
     dp.add_handler(MessageHandler(Filters.text, handle_message))
 
+    PORT = int(os.environ.get("PORT", "8443"))
 
-    updater.start_webhook( listen = "0.0.0.0", port = port, url_path = API_KEY)
-    updater.bot.setWebhook("https://pacific-bastion-45498.herokuapp.com/" + API_KEY)
-    updater.idle()
+    HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME")
+    updater.start_webhook(listen="0.0.0.0", port=PORT, url_path=TOKEN)
+    updater.bot.set_webhook(
+        "https://{}.herokuapp.com/{}".format(HEROKU_APP_NAME, TOKEN))
+
+    #updater.start_webhook( listen = "0.0.0.0", port = port, url_path = API_KEY)
+    #updater.bot.setWebhook("https://pacific-bastion-45498.herokuapp.com/" + API_KEY)
+    # updater.idle()
+
 
 #count = 0
 main()
-
-
