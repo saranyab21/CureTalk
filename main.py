@@ -11,7 +11,7 @@ def run(updater):
     updater.bot.set_webhook("https://{}.herokuapp.com/{}".format(HEROKU_APP_NAME, TOKEN))
 
 def help(update,context):
-    update.message.reply_text("Hello! This is Team Cure Talk.")
+    update.message.reply_text("Hello!! This is Team Cure Talk.")
     update.message.reply_text("\nWe are 5 students from UEMK who have come up with a plan to put Computer Science to mankind's best use!")
     update.message.reply_text("Our team involves:- \n1. Mehuly Chakraborthy \n2. Suvra Shaw \n3. Diptaraj Sen \n4. Saranya Bhattacharjee\n5. Kaustav Roy")
     update.message.reply_text(" We aim to bring to you the basic medical need that might help cure you.")
