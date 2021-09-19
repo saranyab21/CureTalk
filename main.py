@@ -61,7 +61,7 @@ def main():
     dp.add_handler(MessageHandler(Filters.text, handle_message))
 
 
-    updater.start_webhook( listen = "0.0.0.0", port = int(ON_HEROKU), url_path = API_KEY)
+    updater.start_webhook( listen = "0.0.0.0", port = port, url_path = API_KEY)
     updater.bot.setWebhook("https://pacific-bastion-45498.herokuapp.com/" + API_KEY)
     updater.idle()
 
