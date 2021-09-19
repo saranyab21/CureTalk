@@ -2,9 +2,6 @@ from telegram.ext import *
 import response as r
 import os
 
-import os
-
-TOKEN = os.getenv("TOKEN")
 
 ON_HEROKU = os.environ.get('ON_HEROKU')
 
@@ -77,3 +74,4 @@ def main():
 
 #count = 0
 main()
+
