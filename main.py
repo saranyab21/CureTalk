@@ -82,7 +82,7 @@ def main():
 
     HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME")
     updater.start_webhook(listen="0.0.0.0", port=PORT, url_path=TOKEN)
-    updater.bot.set_webhook(
+    updater.bot.setWebhook(
         "https://{}.herokuapp.com/{}".format(HEROKU_APP_NAME, TOKEN))
 
     #updater.start_webhook( listen = "0.0.0.0", port = port, url_path = API_KEY)
