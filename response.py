@@ -66,7 +66,7 @@ def sample(input_text):
             else:
                 y_pred = loaded_model.predict(X_arr.reshape(1, -1))
                 Predicted_Disease = y_pred[0]
-                disease = "We are predicitng you have: " + Predicted_Disease.upper() + "\n"
+                disease = "We are predicting you have: " + Predicted_Disease.upper() + "\n"
                 for i in range(len(disease_description)):
                     if (disease_description["Disease"][i] == Predicted_Disease):
                         disease = disease + "Description of the disease :- \n" + disease_description["Description"][i] + "\n"
