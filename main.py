@@ -3,15 +3,6 @@ import response as r
 import os
 
 
-ON_HEROKU = os.environ.get('ON_HEROKU')
-
-if ON_HEROKU:
-    # get the heroku port
-    port = int(os.environ.get('PORT', 17995))  # as per OP comments default is 17995
-else:
-    port = 3000
-
-
 API_KEY="1977152020:AAGfZUZ9fHqadNDji8WjiPr466dNJo1vfLk"
 
 def help(update,context):
