@@ -2,6 +2,7 @@ from telegram.ext import *
 import response as r
 import os
 
+PORT = int(os.environ.get('PORT',5000))
 
 API_KEY="1977152020:AAGfZUZ9fHqadNDji8WjiPr466dNJo1vfLk"
 
@@ -58,15 +59,7 @@ def main():
     dp.add_error_handler(error)
     dp.add_handler(MessageHandler(Filters.text, handle_message))
 
-    ON_HEROKU = os.environ.get('ON_HEROKU')
-
-    if ON_HEROKU:
-        # get the heroku port
-        port = int(os.environ.get('PORT', 17995))  # as per OP comments default is 17995
-    else:
-        port = 3000
-
-    updater.start_webhook( listen = "0.0.0.0", port = port, url_path = API_KEY)
+    updater.start_webhook( listen = "0.0.0.0", port = int(PORT), url_path = API_KEY)
     updater.bot.setWebhook("https://agile-mountain-59201.herokuapp.com/" + API_KEY)
     updater.idle()
 
